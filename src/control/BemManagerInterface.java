@@ -2,7 +2,7 @@ package control;
 
 import java.util.List;
 
-import domain.Bem;
+import domain.bem.Bem;
 
 public interface BemManagerInterface {
 

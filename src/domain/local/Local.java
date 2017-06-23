@@ -1,15 +1,15 @@
-package domain;
+package domain.local;
 
 public class Local {
 
 	private int numero;
 	private String nome;
 	private String descricao;
-	private String status;
+	private StatusLocal status;
 	private TipoLocal tipo;
 	private int totalBens;
 	
-	public Local(int numero, String nome, String descricao, String status, TipoLocal tipo, int totalBens) {
+	public Local(int numero, String nome, String descricao, StatusLocal status, TipoLocal tipo, int totalBens) {
 		this.numero = numero;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -42,11 +42,11 @@ public class Local {
 		this.descricao = descricao;
 	}
 
-	public String getStatus() {
+	public StatusLocal getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusLocal status) {
 		this.status = status;
 	}
 

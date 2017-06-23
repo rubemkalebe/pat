@@ -1,4 +1,4 @@
-package domain;
+package domain.local;
 
 public class TipoLocal {
 

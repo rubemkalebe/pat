@@ -2,7 +2,7 @@ package control;
 
 import java.util.List;
 
-import domain.Local;
+import domain.local.Local;
 
 public class LocalManager implements LocalManagerInterface {
 

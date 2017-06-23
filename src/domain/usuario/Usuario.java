@@ -1,4 +1,4 @@
-package domain;
+package domain.usuario;
 
 public class Usuario {
 

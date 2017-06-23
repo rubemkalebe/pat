@@ -2,7 +2,7 @@ package control;
 
 import java.util.List;
 
-import domain.Acautelamento;
+import domain.acautelamento.Acautelamento;
 
 public class AcautelamentoManager implements AcautelamentoManagerInterface {
 

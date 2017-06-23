@@ -1,6 +1,10 @@
-package domain;
+package domain.acautelamento;
 
 import java.util.Calendar;
+
+import domain.bem.Bem;
+import domain.local.Local;
+import domain.usuario.Usuario;
 
 public class Acautelamento {
 
@@ -10,11 +14,11 @@ public class Acautelamento {
 	private Calendar dataInicio;
 	private Calendar dataFim;
 	private Local local;
-	private String status;
+	private StatusAcautelamento status;
 	private String observacao;
 	
 	public Acautelamento(int id, Usuario usuario, Bem bem, Calendar dataInicio,
-			Calendar dataFim, Local local, String status, String observacao) {
+			Calendar dataFim, Local local, StatusAcautelamento status, String observacao) {
 		this.id = id;
 		this.usuario = usuario;
 		this.bem = bem;
@@ -73,11 +77,11 @@ public class Acautelamento {
 		this.local = local;
 	}
 
-	public String getStatus() {
+	public StatusAcautelamento getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusAcautelamento status) {
 		this.status = status;
 	}
 

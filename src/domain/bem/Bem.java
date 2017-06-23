@@ -1,11 +1,14 @@
-package domain;
+package domain.bem;
 
 import java.util.Calendar;
+
+import domain.local.Local;
+import domain.usuario.Usuario;
 
 public class Bem {
 
 	private int tombo;
-	private String status;
+	private StatusBem status;
 	private String descricao;
 	private Usuario usuarioCadastro;
 	private Usuario usuarioRemocao;
@@ -13,7 +16,7 @@ public class Bem {
 	private Calendar dataRemocao;
 	private Local local;
 	
-	public Bem(int tombo, String status, String descricao, Usuario usuarioCadastro,
+	public Bem(int tombo, StatusBem status, String descricao, Usuario usuarioCadastro,
 			Calendar dataCadastro, Local local) {
 		this.tombo = tombo;
 		this.status = status;
@@ -33,11 +36,11 @@ public class Bem {
 		this.tombo = tombo;
 	}
 
-	public String getStatus() {
+	public StatusBem getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusBem status) {
 		this.status = status;
 	}
 

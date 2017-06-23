@@ -2,7 +2,7 @@ package control;
 
 import java.util.List;
 
-import domain.Usuario;
+import domain.usuario.Usuario;
 
 public class UsuarioManager implements UsuarioManagerInterface {
 
