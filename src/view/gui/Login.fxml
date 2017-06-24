@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="281.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.LoginController">
+   <children>
+      <TextField fx:id="txtLogin" focusTraversable="false" layoutX="87.0" layoutY="86.0" prefHeight="30.0" prefWidth="200.0" promptText="Login" />
+      <PasswordField fx:id="txtSenha" focusTraversable="false" layoutX="87.0" layoutY="136.0" prefHeight="30.0" prefWidth="200.0" promptText="Senha" />
+      <Button fx:id="btnEntrar" layoutX="138.0" layoutY="188.0" mnemonicParsing="false" onAction="#btnEntrarAction" prefHeight="25.0" prefWidth="100.0" text="Entrar" />
+      <Label fx:id="lblWelcome" layoutX="116.0" layoutY="46.0" prefHeight="16.0" prefWidth="134.0" text="Bem-vindo ao PAT">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLoginStatus" alignment="CENTER" layoutX="85.0" layoutY="225.0" prefHeight="15.0" prefWidth="200.0" textAlignment="CENTER" textFill="#f20404" />
+   </children>
+</AnchorPane>

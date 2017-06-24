@@ -1,10 +1,26 @@
 package main;
 
-public class Main {
+import java.io.IOException;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class Main extends Application {
+
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/gui/Login.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.resizableProperty().setValue(Boolean.FALSE);
+		primaryStage.setTitle("Login");
+		primaryStage.show();
 	}
 
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
