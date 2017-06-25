@@ -1,5 +1,5 @@
 package domain.bem;
 
 public enum StatusBem {
-	// TODO
+	CADASTRADO, ATIVO, MANUTENCAO, ACAUTELADO, RESERVADO, ALIENADO
 }
