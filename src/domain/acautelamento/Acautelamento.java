@@ -17,6 +17,10 @@ public class Acautelamento {
 	private StatusAcautelamento status;
 	private String observacao;
 	
+	public Acautelamento() {
+		// Empty constructor
+	}
+	
 	public Acautelamento(int id, Usuario usuario, Bem bem, Calendar dataInicio,
 			Calendar dataFim, Local local, StatusAcautelamento status, String observacao) {
 		this.id = id;

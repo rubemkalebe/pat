@@ -1,56 +1,77 @@
 package domain.usuario;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 public class Usuario {
 
-	private int id;
-	private TipoUsuario tipo;
-	private String nome;
-	private String login;
+	private ObservableValue<Integer> id;
+	private StringProperty tipo;
+	private StringProperty nome;
+	private StringProperty login;
 	private String senha;
-	private String telefone;
-	private String email;
+	private StringProperty telefone;
+	private StringProperty email;
 	
 	public Usuario(int id, TipoUsuario tipo, String nome, String login, String senha,
 			String telefone, String email) {
-		this.id = id;
-		this.tipo = tipo;
-		this.nome = nome;
-		this.login = login;
+		this.id = new SimpleIntegerProperty(id).asObject();
+		this.tipo = new SimpleStringProperty(tipo.getValue());
+		this.nome = new SimpleStringProperty(nome);
+		this.login = new SimpleStringProperty(login);
 		this.senha = senha;
-		this.telefone = telefone;
-		this.email = email;
+		this.telefone = new SimpleStringProperty(telefone);
+		this.email = new SimpleStringProperty(email);
 	}
 
 	public int getId() {
-		return id;
+		return id.getValue();
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id = new SimpleIntegerProperty(id).asObject();
+	}
+	
+	public ObservableValue<Integer> idProperty() {
+		return this.id;
 	}
 
 	public TipoUsuario getTipo() {
-		return tipo;
+		return TipoUsuario.valueOf(tipo.get().toUpperCase());
 	}
 
 	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo;
+		this.tipo.set(tipo.getValue());
+	}
+	
+	public StringProperty tipoProperty() {
+		return this.tipo;
 	}
 
 	public String getNome() {
-		return nome;
+		return nome.get();
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome.set(nome);
+	}
+	
+	public StringProperty nomeProperty() {
+		return this.nome;
 	}
 
 	public String getLogin() {
-		return login;
+		return login.get();
 	}
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.login.set(login);
+	}
+	
+	public StringProperty loginProperty() {
+		return this.login;
 	}
 
 	public String getSenha() {
@@ -62,19 +83,27 @@ public class Usuario {
 	}
 
 	public String getTelefone() {
-		return telefone;
+		return telefone.get();
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		this.telefone.set(telefone);
+	}
+	
+	public StringProperty telefoneProperty() {
+		return this.telefone;
 	}
 
 	public String getEmail() {
-		return email;
+		return email.get();
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email.set(email);
+	}
+	
+	public StringProperty emailProperty() {
+		return this.email;
 	}
 
 	@Override
@@ -89,24 +118,25 @@ public class Usuario {
 		if (email == null) {
 			if (other.email != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!email.get().equals(other.email.get()))
 			return false;
-		if (id != other.id)
+		if (id.getValue() != other.id.getValue())
 			return false;
 		if (login == null) {
 			if (other.login != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} else if (!login.get().equals(other.login.get()))
 			return false;
-		if (tipo != other.tipo)
+		if (tipo.get() != other.tipo.get())
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", login=" + login + ", senha=" + senha
-				+ ", telefone=" + telefone + ", email=" + email + "]";
+		return "Usuario [id=" + id.getValue() + ", tipo=" + tipo.getValue() + ", nome=" + nome.get() +
+				", login=" + login.get() + ", senha=" + senha
+				+ ", telefone=" + telefone.get() + ", email=" + email.get() + "]";
 	}
 	
 }

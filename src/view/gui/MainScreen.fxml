@@ -1,67 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<!-- <AnchorPane prefHeight="432.0" prefWidth="631.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="view.gui.MainScreenController"> -->
-<!--    <children> -->
-<!--       <Label alignment="CENTER" layoutX="151.0" layoutY="132.0" prefHeight="159.0" prefWidth="336.0" text="Main Screen"> -->
-<!--          <font> -->
-<!--             <Font size="39.0" /> -->
-<!--          </font> -->
-<!--       </Label> -->
-<!--    </children> -->
-<!-- </AnchorPane> -->
-
-<VBox id="vbox" prefHeight="400" prefWidth="800"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="view.gui.MainScreenController">
-   <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
-      <menus>
-         <Menu text="Acautelamento">
-            <items>
-               <MenuItem text="Novo acautelamento"/>
-               <MenuItem text="Inativar acautelamento"/>
-               <MenuItem text="Editar acautelamento"/>
-               <MenuItem text="Listar acautelamentos"/>
-            </items>
-         </Menu>
-         <Menu text="Bem">
-            <items>
-               <MenuItem text="Novo bem"/>
-               <MenuItem text="Remover bem"/>
-               <MenuItem text="Editar bem"/>
-               <MenuItem text="Listar bens"/>
-            </items>
-         </Menu>
-         <Menu text="Local">
-            <items>
-               <MenuItem text="Novo local"/>
-               <MenuItem text="Remover local"/>
-               <MenuItem text="Editar local"/>
-               <MenuItem text="Listar locais"/>
-            </items>
-         </Menu>
-         <Menu text="Usuário">
-            <items>
-               <MenuItem text="Novo usuário"/>
-               <MenuItem text="Remover usuário"/>
-               <MenuItem text="Editar usuário"/>
-               <MenuItem text="Listar usuários"/>
-            </items>
-         </Menu>
-         <Menu text="Help">
-            <items>
-               <MenuItem text="Search" disable="true"/>
-               <MenuItem text="Online Manual" visible="false"/>
-               <SeparatorMenuItem />
-               <MenuItem text="About" onAction="#handleAboutAction"/>
-            </items>
-         </Menu>
-      </menus>
-   </MenuBar>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gui.MainScreenController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_acautelamento" text="Acautelamento">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar fx:id="toolbar_acautelamento" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="acautelamento_novo_btn" mnemonicParsing="false" text="Novo" />
+                              <Button fx:id="acautelamento_editar_btn" mnemonicParsing="false" text="Editar" />
+                              <Button fx:id="acautelamento_remover_btn" mnemonicParsing="false" text="Inativar" />
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="acautelamento_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                          <columns>
+                            <TableColumn prefWidth="40.0" text="id" />
+                              <TableColumn prefWidth="120.0" text="Bem" />
+                              <TableColumn prefWidth="120.0" text="Local" />
+                            <TableColumn prefWidth="120.0" text="Usuario" />
+                              <TableColumn text="Inicio" />
+                              <TableColumn text="Fim" />
+                              <TableColumn prefWidth="90.0" text="Status" />
+                              <TableColumn prefWidth="149.0" text="Observaçoes" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tab_bem" text="Bem">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar fx:id="toolbar_bem" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="bem_novo_btn" mnemonicParsing="false" text="Novo" />
+                              <Button fx:id="bem_editar_btn" mnemonicParsing="false" text="Editar" />
+                              <Button fx:id="bem_remover_btn" mnemonicParsing="false" text="Remover" />
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="bem_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                          <columns>
+                            <TableColumn prefWidth="100.0" text="Tombo" />
+                              <TableColumn prefWidth="120.0" text="Local" />
+                              <TableColumn prefWidth="189.0" text="Descriçao" />
+                              <TableColumn prefWidth="150.0" text="Cadastrador por" />
+                              <TableColumn prefWidth="120.0" text="Data cadastro" />
+                            <TableColumn prefWidth="120.0" text="Status" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tab_local" text="Local">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar fx:id="toolbar_local" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="local_novo_btn" mnemonicParsing="false" text="Novo" />
+                              <Button fx:id="local_editar_btn" mnemonicParsing="false" text="Editar" />
+                              <Button fx:id="local_remover_btn" mnemonicParsing="false" text="Remover" />
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="local_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                          <columns>
+                            <TableColumn prefWidth="60.0" text="id" />
+                            <TableColumn prefWidth="120.0" text="Nome" />
+                              <TableColumn prefWidth="150.0" text="Descriçao" />
+                              <TableColumn prefWidth="120.0" text="Tipo" />
+                              <TableColumn prefWidth="120.0" text="Status" />
+                              <TableColumn prefWidth="100.0" text="Total bens" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+            </Tab>
+            <Tab fx:id="tab_usuario" text="Usuario">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar fx:id="toolbar_usuario" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="usuario_novo_btn" mnemonicParsing="false" onAction="#handleNovoUsuario" text="Novo" />
+                              <Button fx:id="usuario_editar_btn" mnemonicParsing="false" onAction="#handleEditarUsuario" text="Editar" />
+                              <Button fx:id="usuario_remover_btn" mnemonicParsing="false" onAction="#handleDeleteUsuario" text="Remover" />
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="usuario_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                          <columns>
+                            <TableColumn fx:id="tab_usuario_id" prefWidth="50.0" text="id" />
+                            <TableColumn fx:id="tab_usuario_tipo" prefWidth="100.0" text="Tipo" />
+                              <TableColumn fx:id="tab_usuario_nome" prefWidth="150.0" text="Nome" />
+                              <TableColumn fx:id="tab_usuario_login" prefWidth="120.0" text="Login" />
+                              <TableColumn fx:id="tab_usuario_telefone" prefWidth="110.0" text="Telefone" />
+                              <TableColumn fx:id="tab_usuario_email" prefWidth="200.0" text="E-mail" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import control.UsuarioManager;
+import control.UsuarioManagerInterface;
+import domain.usuario.Usuario;
+import domain.usuario.exceptions.SenhaInvalida;
+import domain.usuario.exceptions.UsuarioNotFound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,19 +32,32 @@ public class LoginController implements Initializable {
 	@FXML
 	private Label lblLoginStatus;
 	
+	public static Usuario usuarioLogado = null;
+	
 	@FXML
 	private void btnEntrarAction(ActionEvent event) throws IOException {
-		if(txtLogin.getText().equals("teste") && txtSenha.getText().equals("teste")) {
-			((Node) (event.getSource())).getScene().getWindow().hide();
-			Parent parent = FXMLLoader.load(getClass().getResource("/view/gui/MainScreen.fxml"));
-			Stage stage = new Stage();
-			Scene scene = new Scene(parent);
-			stage.setScene(scene);
-			stage.resizableProperty().setValue(Boolean.FALSE);
-			stage.setTitle("PAT");
-			stage.show();
-		} else {
-			lblLoginStatus.setText("Usuário ou senha inválida!");
+		if(txtLogin.getText().length() == 0 || txtSenha.getText().length() == 0) {
+			lblLoginStatus.setText("Campo inválido");
+			return;
+		}
+		
+		UsuarioManagerInterface usuarioManager = new UsuarioManager();
+		try {
+			usuarioLogado = usuarioManager.autenticarUsuario(txtLogin.getText(), txtSenha.getText());
+			if(usuarioLogado != null) {
+				((Node) (event.getSource())).getScene().getWindow().hide();
+				Parent parent = FXMLLoader.load(getClass().getResource("/view/gui/MainScreen.fxml"));
+				Stage stage = new Stage();
+				Scene scene = new Scene(parent);
+				stage.setScene(scene);
+				//stage.resizableProperty().setValue(Boolean.FALSE);
+				stage.setTitle("PAT");
+				stage.show();
+			}
+		} catch(UsuarioNotFound e1) {
+			lblLoginStatus.setText("Usuário não encontrado!");
+		} catch(SenhaInvalida e2) {
+			lblLoginStatus.setText("Senha inválida!");
 		}
 	}
 	
