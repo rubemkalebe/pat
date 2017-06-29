@@ -15,4 +15,8 @@ public class DBTables {
 	public final static int USUARIO_ATTR_TIPO_PROFESSOR = 3;
 	public final static int USUARIO_ATTR_TIPO_ALUNO = 4;
 	
+	public static String TIPOLOCAL_TABLE_NAME = "TipoLocal";
+	public static String TIPOLOCAL_ATTR_ID = "IdTipoLocal";
+	public static String TIPOLOCAL_ATTR_NOME = "Nome";
+	
 }

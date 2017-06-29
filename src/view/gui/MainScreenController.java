@@ -189,4 +189,29 @@ public class MainScreenController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	private void handleGerenciarTipos(ActionEvent ae) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/view/gui/GerenciarTiposLocais.fxml"));
+		try {
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Gerenciar Tipos de Locais");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			
+			Node source = (Node) ae.getSource();
+		    Window theStage = source.getScene().getWindow();
+			
+			dialogStage.initOwner(theStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+			
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -1,19 +1,42 @@
 package domain.local;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 public class TipoLocal {
 
-	private String tipo;
+	private ObservableValue<Integer> id;
+	private StringProperty nome;
 
-	public TipoLocal(String tipo) {
-		this.tipo = tipo;
+	public TipoLocal(int id, String tipo) {
+		this.id = new SimpleIntegerProperty(id).asObject();
+		this.nome = new SimpleStringProperty(tipo);
 	}
 
-	public String getTipo() {
-		return tipo;
+	public int getId() {
+		return id.getValue();
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setId(int id) {
+		this.id = new SimpleIntegerProperty(id).asObject();
+	}
+
+	public ObservableValue<Integer> idProperty() {
+		return this.id;
+	}
+
+	public String getNome() {
+		return nome.get();
+	}
+
+	public void setNome(String nome) {
+		this.nome.set(nome);
+	}
+	
+	public StringProperty nomeProperty() {
+		return this.nome;
 	}
 
 	@Override
@@ -25,17 +48,17 @@ public class TipoLocal {
 		if (!(obj instanceof TipoLocal))
 			return false;
 		TipoLocal other = (TipoLocal) obj;
-		if (tipo == null) {
-			if (other.tipo != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!tipo.equals(other.tipo))
+		} else if (!nome.get().equals(other.nome.get()))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TipoLocal [tipo=" + tipo + "]";
-	}	
+		return "TipoLocal [id=" + id.getValue() + ", nome=" + nome.get() + "]";
+	}
 	
 }

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import domain.bem.Bem;
 import domain.local.Local;
 import domain.usuario.Usuario;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 
 public class Acautelamento {
 
@@ -39,6 +41,10 @@ public class Acautelamento {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public ObservableValue<Integer> idProperty() {
+		return new SimpleIntegerProperty(id).asObject();
 	}
 
 	public Usuario getUsuario() {
