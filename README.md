@@ -7,6 +7,8 @@ O problema de gerenciar bens patrimoniais afeta bolsistas, servidores, alunos, p
  
 Para instituições de grande porte que lidem com empréstimo, saída ou locação de materiais, o PAT é um sistema de gerência de bens que fará o cadastro dos bens no sistema e lidará com seu empréstimo, na forma de cautelas, sua alocação física e fornecerá seu status na instituição, ao contrário de do uso de planilhas ou anotações que é o que ocorre em geral. Nosso produto visa otimizar tempo e esforço do usuário, a fim de proporcionar a gerência desses bens de forma simples e eficaz.
 
+O projeto está hospedado em https://github.com/rubemkalebe/pat.
+
 ## Como executar a aplicação? ##
 
 Para executar a aplicação basta entrar com o comando **java -jar pat.jar**.
