@@ -1,18 +1,22 @@
 package domain.bem;
 
 import domain.local.Local;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Bem {
 
+	private ObjectProperty<Integer> id;
 	private StringProperty tombo;
 	private StringProperty status;
 	private StringProperty descricao;
 	private Local local;
 	private StringProperty localString;
 	
-	public Bem(String tombo, StatusBem status, String descricao, Local local) {
+	public Bem(int id, String tombo, StatusBem status, String descricao, Local local) {
+		this.id = new SimpleObjectProperty<Integer>(id);
 		this.tombo = new SimpleStringProperty(tombo);
 		this.status = new SimpleStringProperty(status.getValue());
 		this.descricao = new SimpleStringProperty(descricao);
@@ -21,13 +25,26 @@ public class Bem {
 		this.localString = new SimpleStringProperty(local.getNome());
 	}
 	
-	public Bem(String tombo, StatusBem status, String descricao, StringProperty localString) {
+	public Bem(int id, String tombo, StatusBem status, String descricao, StringProperty localString) {
+		this.id = new SimpleObjectProperty<Integer>(id);
 		this.tombo = new SimpleStringProperty(tombo);
 		this.status = new SimpleStringProperty(status.getValue());
 		this.descricao = new SimpleStringProperty(descricao);
 				
 		this.local = null;
 		this.localString = localString;
+	}
+	
+	public ObjectProperty<Integer> idProperty() {
+		return this.id;
+	}
+	
+	public int getId() {
+		return this.id.get();
+	}
+	
+	public void setId(int id) {
+		this.id.set(id);
 	}
 
 	public String getTombo() {

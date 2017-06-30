@@ -89,7 +89,10 @@ public class MainScreenController implements Initializable {
 	private TableView<Bem> bem_table;
 	
 	@FXML
-	private TableColumn<Bem, String> tab_bem_id;
+	private TableColumn<Bem, Integer> tab_bem_id;
+	
+	@FXML
+	private TableColumn<Bem, String> tab_bem_tombo;
 	
 	@FXML
 	private TableColumn<Bem, String> tab_bem_local;
@@ -147,7 +150,8 @@ public class MainScreenController implements Initializable {
 		
 		bemData.addAll(bemManager.getAllBens());
 		bem_table.setItems(bemData);
-		tab_bem_id.setCellValueFactory(cellData -> cellData.getValue().tomboProperty());
+		tab_bem_id.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+		tab_bem_tombo.setCellValueFactory(cellData -> cellData.getValue().tomboProperty());
 		tab_bem_local.setCellValueFactory(cellData -> cellData.getValue().localProperty());
 		tab_bem_desc.setCellValueFactory(cellData -> cellData.getValue().descricaoProperty());
 		tab_bem_status.setCellValueFactory(cellData -> cellData.getValue().statusProperty());

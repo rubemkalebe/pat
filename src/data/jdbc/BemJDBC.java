@@ -33,23 +33,31 @@ public class BemJDBC implements BemDAO {
 				+ ")";
 		System.out.println(sqlForInsertion);
 		
-		Bem bem = null;
+		int last_id = 0;
 		try {
 			dbUtil.getStatement().executeUpdate(sqlForInsertion);
-			bem = new Bem(tombo, status, descricao, local);
+			String sqlForRetrievingID = "SELECT LAST_INSERT_ID() AS last_id";
+			ResultSet resultSet = dbUtil.getStatement().executeQuery(sqlForRetrievingID);
+			if(resultSet.next()) {
+				last_id = resultSet.getInt("last_id");
+			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		dbUtil.disconnect();
 		
-		return bem;
+		if(last_id == 0) {
+			return null;
+		} else {
+			return new Bem(last_id, tombo, status, descricao, local);
+		}
 	}
 
 	@Override
 	public void removeBem(Bem bem) {
 		dbUtil.connect();
 		String sql = "DELETE FROM " + DBTables.BEM_TABLE_NAME
-				+ " WHERE " + DBTables.BEM_ATTR_TOMBO + "=\'" + bem.getTombo() + "\'";
+				+ " WHERE " + DBTables.BEM_ATTR_ID + "=" + bem.getId();
 		System.out.println(sql);
 		
 		try {
@@ -69,7 +77,7 @@ public class BemJDBC implements BemDAO {
 				+ DBTables.BEM_ATTR_STATUS + "=" + String.valueOf(bem.getStatus().getAsInt()) + ","
 				+ DBTables.BEM_ATTR_DESCRICAO + "=" + "\'" + bem.getDescricao() + "\'" + ","
 				+ DBTables.BEM_ATTR_LOCAL + "=" + String.valueOf(bem.getLocal().getNumero())
-				+ " WHERE " + DBTables.BEM_ATTR_TOMBO + "=\'" + bem.getTombo() + "\'";
+				+ " WHERE " + DBTables.BEM_ATTR_ID + "=\'" + bem.getId() + "\'";
 		System.out.println(sql);
 		
 		try {
@@ -84,6 +92,7 @@ public class BemJDBC implements BemDAO {
 	public List<Bem> getAllBens() {
 		dbUtil.connect();
 		String sql = "SELECT "
+					+ DBTables.BEM_ATTR_ID + ","
 					+ DBTables.BEM_ATTR_TOMBO + ","
 					+ DBTables.BEM_ATTR_STATUS + ","
 					+ DBTables.BEM_ATTR_DESCRICAO + ","
@@ -99,6 +108,7 @@ public class BemJDBC implements BemDAO {
 			ResultSet resultSet = dbUtil.getStatement().executeQuery(sql);
 			while(resultSet.next()) {
 				Bem b = new Bem(
+						Integer.valueOf(resultSet.getString(DBTables.BEM_ATTR_ID)),
 						resultSet.getString(DBTables.BEM_ATTR_TOMBO),
 						convertStatusInfo(Integer.valueOf(resultSet.getString(DBTables.BEM_ATTR_STATUS))),
 						resultSet.getString(DBTables.BEM_ATTR_DESCRICAO),

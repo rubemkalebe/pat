@@ -30,6 +30,7 @@ public class DBTables {
 	public final static int LOCAL_ATTR_STATUS_DISPONIVEL = 1;
 	
 	public static String BEM_TABLE_NAME = "Bem";
+	public static String BEM_ATTR_ID = "IdBem";
 	public static String BEM_ATTR_TOMBO = "TomboBem";
 	public static String BEM_ATTR_STATUS = "StatusBem";
 	public static String BEM_ATTR_DESCRICAO = "DescricaoBem";
