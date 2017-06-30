@@ -1,8 +1,16 @@
 package view.gui.dialogs;
 
-import control.UsuarioManager;
-import domain.usuario.TipoUsuario;
-import domain.usuario.Usuario;
+import java.util.List;
+
+import control.BemManager;
+import control.BemManagerInterface;
+import control.LocalManager;
+import control.LocalManagerInterface;
+import domain.bem.Bem;
+import domain.bem.StatusBem;
+import domain.local.Local;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -11,29 +19,37 @@ import javafx.stage.Stage;
 public class BemEditarDialogController {
 
 	@FXML
-	private ComboBox<String> usuario_tipo_cb;
+	private TextField bem_tombo_txt;
 	
 	@FXML
-	private TextField usuario_nome_txt;
+	private ComboBox<String> bem_status_cb;
 	
 	@FXML
-	private TextField usuario_fone_txt;
-	
+	private TextField bem_desc_txt;
+		
 	@FXML
-	private TextField usuario_email_txt;
+	private ComboBox<String> bem_local_cb;
 	
-	@FXML
-	private TextField usuario_login_txt;
-	
+	private BemManagerInterface bemManager = new BemManager();
+	private List<Local> locaisList;
 	private Stage dialogStage;
-	private Usuario usuario;
+	private Bem bem;
 	
 	/**
      * Inicializa a classe controller. Este método é chamado automaticamente
      * após o arquivo fxml ter sido carregado.
      */
     @FXML
-    private void initialize() {}
+    private void initialize() {    	
+    	ObservableList<String> locais = FXCollections.observableArrayList();
+    	LocalManagerInterface localManager = new LocalManager();
+    	locaisList = localManager.getAllLocais();
+    	
+    	for(Local l : locaisList) {
+    		locais.add(l.getNome());
+    	}
+    	bem_local_cb.setItems(locais);
+    }
     
     /**
      * Define o palco deste dialog.
@@ -44,35 +60,46 @@ public class BemEditarDialogController {
         this.dialogStage = dialogStage;
     }
     
-    /**
-     * Define o usuario a ser editado no dialog.
-     * 
-     * @param usuario
-     */
-    public void setUsuario(Usuario usuario) {
-    	this.usuario = usuario;
+    public void setBem(Bem bem) {
+    	this.bem = bem;
     	
-    	usuario_tipo_cb.setValue(usuario.getTipo().getValue());
-    	usuario_nome_txt.setText(usuario.getNome());
-    	usuario_fone_txt.setText(usuario.getTelefone());
-    	usuario_email_txt.setText(usuario.getEmail());
-    	usuario_login_txt.setText(usuario.getLogin());
+    	bem_tombo_txt.setText(bem.getTombo());
+    	bem_status_cb.setValue(bem.getStatus().getValue());    	
+    	bem_desc_txt.setText(bem.getDescricao());
+    	bem_local_cb.setValue(bem.localProperty().get());
     }
     
     @FXML
     private void handleOk() {
     	if(isInputValid()) {
-    		usuario.setTipo(TipoUsuario.valueOf(usuario_tipo_cb.getSelectionModel().getSelectedItem().toUpperCase()));
-    		usuario.setNome(usuario_nome_txt.getText());
-    		usuario.setTelefone(usuario_fone_txt.getText());
-    		usuario.setEmail(usuario_email_txt.getText());
-    		usuario.setLogin(usuario_login_txt.getText());
-    		
-    		UsuarioManager usuarioManager = new UsuarioManager();
-			usuarioManager.editUsuario(usuario);
-    		
+    		if(bem != null) {
+    			bem.setTombo(bem_tombo_txt.getText());
+    			bem.setStatus(convertStringToStatus(bem_status_cb.getSelectionModel().getSelectedItem()));
+    			bem.setLocal(searchLocal(bem_local_cb.getSelectionModel().getSelectedItem()));
+    			bem.setLocalString(bem_local_cb.getSelectionModel().getSelectedItem());
+    			bem.setDescricao(bem_desc_txt.getText());
+    			
+    			bemManager.editBem(bem, null, null);
+    		} else {
+    			bem = bemManager.addBem(
+    					bem_tombo_txt.getText(),
+    					convertStringToStatus(bem_status_cb.getSelectionModel().getSelectedItem()),
+    					bem_desc_txt.getText(),
+    					searchLocal(bem_local_cb.getSelectionModel().getSelectedItem()),
+    					null,
+    					null    					
+    			);
+    		}
     		dialogStage.close();
     	}
+    }
+    
+    private StatusBem convertStringToStatus(String s) {
+    	if(s.equals(StatusBem.MANUTENCAO.getValue())) {
+			return StatusBem.MANUTENCAO;
+		} else {
+			return StatusBem.valueOf(s.toUpperCase());
+		}
     }
     
     @FXML
@@ -83,5 +110,18 @@ public class BemEditarDialogController {
     private boolean isInputValid() {
     	// TODO Validacao
     	return true;
+    }
+    
+    public Bem getBem() {
+    	return bem;
+    }
+    
+    private Local searchLocal(String nome) {
+    	for(Local l : this.locaisList) {
+    		if(l.getNome().equals(nome)) {
+    			return l;
+    		}
+    	}
+    	return null;
     }
 }

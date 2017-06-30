@@ -44,20 +44,18 @@
                      <children>
                         <ToolBar fx:id="toolbar_bem" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <items>
-                            <Button fx:id="bem_novo_btn" mnemonicParsing="false" text="Novo" />
-                              <Button fx:id="bem_editar_btn" mnemonicParsing="false" text="Editar" />
-                              <Button fx:id="bem_remover_btn" mnemonicParsing="false" text="Remover" />
+                            <Button fx:id="bem_novo_btn" mnemonicParsing="false" onAction="#handleNovoBem" text="Novo" />
+                              <Button fx:id="bem_editar_btn" mnemonicParsing="false" onAction="#handleEditarBem" text="Editar" />
+                              <Button fx:id="bem_remover_btn" mnemonicParsing="false" onAction="#handleDeleteBem" text="Remover" />
                               <Button fx:id="bem_reservar_btn" mnemonicParsing="false" text="Reservar" />
                           </items>
                         </ToolBar>
                         <TableView fx:id="bem_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                           <columns>
-                            <TableColumn prefWidth="100.0" text="Tombo" />
-                              <TableColumn prefWidth="120.0" text="Local" />
-                              <TableColumn prefWidth="189.0" text="Descriçao" />
-                              <TableColumn prefWidth="150.0" text="Cadastrador por" />
-                              <TableColumn prefWidth="120.0" text="Data cadastro" />
-                            <TableColumn prefWidth="120.0" text="Status" />
+                            <TableColumn fx:id="tab_bem_id" prefWidth="100.0" text="Tombo" />
+                              <TableColumn fx:id="tab_bem_local" prefWidth="120.0" text="Local" />
+                              <TableColumn fx:id="tab_bem_desc" prefWidth="189.0" text="Descriçao" />
+                            <TableColumn fx:id="tab_bem_status" prefWidth="120.0" text="Status" />
                           </columns>
                         </TableView>
                      </children>
@@ -70,20 +68,20 @@
                      <children>
                         <ToolBar fx:id="toolbar_local" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <items>
-                            <Button fx:id="local_novo_btn" mnemonicParsing="false" text="Novo" />
-                              <Button fx:id="local_editar_btn" mnemonicParsing="false" text="Editar" />
-                              <Button fx:id="local_remover_btn" mnemonicParsing="false" text="Remover" />
+                            <Button fx:id="local_novo_btn" mnemonicParsing="false" onAction="#handleNovoLocal" text="Novo" />
+                              <Button fx:id="local_editar_btn" mnemonicParsing="false" onAction="#handleEditarLocal" text="Editar" />
+                              <Button fx:id="local_remover_btn" mnemonicParsing="false" onAction="#handleDeleteLocal" text="Remover" />
                               <Button mnemonicParsing="false" onAction="#handleGerenciarTipos" text="Gerenciar tipos de local" />
                           </items>
                         </ToolBar>
                         <TableView fx:id="local_table" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                           <columns>
-                            <TableColumn prefWidth="60.0" text="id" />
-                            <TableColumn prefWidth="120.0" text="Nome" />
-                              <TableColumn prefWidth="150.0" text="Descriçao" />
-                              <TableColumn prefWidth="120.0" text="Tipo" />
-                              <TableColumn prefWidth="120.0" text="Status" />
-                              <TableColumn prefWidth="100.0" text="Total bens" />
+                            <TableColumn fx:id="tab_local_id" prefWidth="60.0" text="id" />
+                            <TableColumn fx:id="tab_local_nome" prefWidth="120.0" text="Nome" />
+                              <TableColumn fx:id="tab_local_desc" prefWidth="150.0" text="Descriçao" />
+                              <TableColumn fx:id="tab_local_tipo" prefWidth="120.0" text="Tipo" />
+                              <TableColumn fx:id="tab_local_status" prefWidth="120.0" text="Status" />
+                              <TableColumn fx:id="tab_local_total" prefWidth="100.0" text="Total bens" />
                           </columns>
                         </TableView>
                      </children>

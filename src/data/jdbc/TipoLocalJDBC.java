@@ -23,7 +23,7 @@ public class TipoLocalJDBC implements TipoLocalDAO {
 		String sqlForInsertion = "INSERT INTO " + DBTables.TIPOLOCAL_TABLE_NAME + "(Nome)"
 				+ " VALUES ("
 				+ "\'" + nome + "\'" + ")";
-		System.out.println(sqlForInsertion);
+		
 		int last_id = 0;
 		try {
 			dbUtil.getStatement().executeUpdate(sqlForInsertion);
@@ -49,7 +49,7 @@ public class TipoLocalJDBC implements TipoLocalDAO {
 		dbUtil.connect();
 		String sql = "DELETE FROM " + DBTables.TIPOLOCAL_TABLE_NAME
 				+ " WHERE " + DBTables.TIPOLOCAL_ATTR_ID + "=" + String.valueOf(tipoLocal.getId());
-		System.out.println(sql);
+
 		try {
 			dbUtil.getStatement().executeUpdate(sql);
 		} catch(SQLException e) {
@@ -64,7 +64,7 @@ public class TipoLocalJDBC implements TipoLocalDAO {
 		String sql = "UPDATE " + DBTables.TIPOLOCAL_TABLE_NAME + " SET "
 				+ DBTables.TIPOLOCAL_ATTR_NOME + "=" + "\'" + tipoLocal.getNome() + "\'"
 				+ " WHERE " + DBTables.TIPOLOCAL_ATTR_ID + "=" + String.valueOf(tipoLocal.getId());
-		System.out.println(sql);		
+
 		try {
 			dbUtil.getStatement().executeUpdate(sql);
 		} catch(SQLException e) {
@@ -78,7 +78,7 @@ public class TipoLocalJDBC implements TipoLocalDAO {
 		dbUtil.connect();
 		String sql = "SELECT * FROM " + DBTables.TIPOLOCAL_TABLE_NAME;
 		List<TipoLocal> tipos = new ArrayList<TipoLocal>();
-		System.out.println(sql);
+
 		try {
 			ResultSet resultSet = dbUtil.getStatement().executeQuery(sql);
 			while(resultSet.next()) {

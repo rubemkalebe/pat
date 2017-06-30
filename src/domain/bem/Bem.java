@@ -1,87 +1,73 @@
 package domain.bem;
 
-import java.util.Calendar;
-
 import domain.local.Local;
-import domain.usuario.Usuario;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Bem {
 
-	private int tombo;
-	private StatusBem status;
-	private String descricao;
-	private Usuario usuarioCadastro;
-	private Usuario usuarioRemocao;
-	private Calendar dataCadastro;
-	private Calendar dataRemocao;
+	private StringProperty tombo;
+	private StringProperty status;
+	private StringProperty descricao;
 	private Local local;
+	private StringProperty localString;
 	
-	public Bem(int tombo, StatusBem status, String descricao, Usuario usuarioCadastro,
-			Calendar dataCadastro, Local local) {
-		this.tombo = tombo;
-		this.status = status;
-		this.descricao = descricao;
-		this.usuarioCadastro = usuarioCadastro;
-		this.dataCadastro = dataCadastro;
+	public Bem(String tombo, StatusBem status, String descricao, Local local) {
+		this.tombo = new SimpleStringProperty(tombo);
+		this.status = new SimpleStringProperty(status.getValue());
+		this.descricao = new SimpleStringProperty(descricao);
+				
 		this.local = local;
-		this.usuarioRemocao = null;
-		this.dataRemocao = null;
+		this.localString = new SimpleStringProperty(local.getNome());
+	}
+	
+	public Bem(String tombo, StatusBem status, String descricao, StringProperty localString) {
+		this.tombo = new SimpleStringProperty(tombo);
+		this.status = new SimpleStringProperty(status.getValue());
+		this.descricao = new SimpleStringProperty(descricao);
+				
+		this.local = null;
+		this.localString = localString;
 	}
 
-	public int getTombo() {
-		return tombo;
+	public String getTombo() {
+		return tombo.get();
 	}
 
-	public void setTombo(int tombo) {
-		this.tombo = tombo;
+	public void setTombo(String tombo) {
+		this.tombo.set(tombo);
+	}
+	
+	public StringProperty tomboProperty() {
+		return this.tombo;
 	}
 
 	public StatusBem getStatus() {
-		return status;
+		if(this.status.get().equals(StatusBem.MANUTENCAO.getValue())) {
+			return StatusBem.MANUTENCAO;
+		} else {
+			return StatusBem.valueOf(status.get().toUpperCase());
+		}
 	}
 
 	public void setStatus(StatusBem status) {
-		this.status = status;
+		this.status.set(status.getValue());
+	}
+	
+	public StringProperty statusProperty() {
+		return this.status;
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return descricao.get();
 	}
 
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		this.descricao.set(descricao);
 	}
-
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
-	public void setUsuarioCadastro(Usuario usuarioCadastro) {
-		this.usuarioCadastro = usuarioCadastro;
-	}
-
-	public Usuario getUsuarioRemocao() {
-		return usuarioRemocao;
-	}
-
-	public void setUsuarioRemocao(Usuario usuarioRemocao) {
-		this.usuarioRemocao = usuarioRemocao;
-	}
-
-	public Calendar getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Calendar dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public Calendar getDataRemocao() {
-		return dataRemocao;
-	}
-
-	public void setDataRemocao(Calendar dataRemocao) {
-		this.dataRemocao = dataRemocao;
+	
+	public StringProperty descricaoProperty() {
+		return this.descricao;
 	}
 
 	public Local getLocal() {
@@ -91,12 +77,19 @@ public class Bem {
 	public void setLocal(Local local) {
 		this.local = local;
 	}
+	
+	public StringProperty localProperty() {
+		return this.localString;
+	}
+	
+	public void setLocalString(String local) {
+		this.localString.set(local);
+	}
 
 	@Override
 	public String toString() {
-		return "Bem [tombo=" + tombo + ", status=" + status + ", descricao=" + descricao + ", usuarioCadastro="
-				+ usuarioCadastro + ", usuarioRemocao=" + usuarioRemocao + ", dataCadastro=" + dataCadastro
-				+ ", dataRemocao=" + dataRemocao + ", local=" + local + "]";
+		return "Bem [tombo=" + tombo.get() + ", status=" + status.get() + ", descricao=" + descricao.get() 
+				+ ", local=" + local.getNome() + "]";
 	}
 
 	@Override
@@ -108,7 +101,7 @@ public class Bem {
 		if (!(obj instanceof Bem))
 			return false;
 		Bem other = (Bem) obj;
-		if (tombo != other.tombo)
+		if (!tombo.get().equals(other.getTombo()))
 			return false;
 		return true;
 	}
